@@ -1,0 +1,27 @@
+{
+  "tiskelGeocoderApp": {
+    "poiGroup": {
+      "home": {
+        "title": "Poi Group",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Dodaj Poi Group",
+        "createOrEditLabel": "Dodaj lub edytuj: Poi Group",
+        "notFound": "No Poi Groups found"
+      },
+      "created": "Utworzono nowy obiekt typu Poi Group z identyfikatorem {{ param }}",
+      "updated": "Uaktualniono obiekt typu Poi Group z identyfikatorem {{ param }}",
+      "deleted": "Usunięto obiekt typu Poi Group z identyfikatorem {{ param }}",
+      "delete": {
+        "question": "Czy na pewno chcesz usunąć Poi Group {{ id }}?"
+      },
+      "detail": {
+        "title": "Poi Group"
+      },
+      "id": "ID",
+      "name": "Name",
+      "prefix": "Prefix",
+      "active": "Active",
+      "poi": "Poi"
+    }
+  }
+}

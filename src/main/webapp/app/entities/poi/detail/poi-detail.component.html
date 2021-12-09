@@ -1,0 +1,68 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="poi">
+      <h2 data-cy="poiDetailsHeading"><span jhiTranslate="tiskelGeocoderApp.poi.detail.title">Poi</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ poi.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="tiskelGeocoderApp.poi.name">Name</span></dt>
+        <dd>
+          <span>{{ poi.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="tiskelGeocoderApp.poi.street">Street</span></dt>
+        <dd>
+          <span>{{ poi.street }}</span>
+        </dd>
+        <dt><span jhiTranslate="tiskelGeocoderApp.poi.buildingNumber">Building Number</span></dt>
+        <dd>
+          <span>{{ poi.buildingNumber }}</span>
+        </dd>
+        <dt><span jhiTranslate="tiskelGeocoderApp.poi.postCode">Post Code</span></dt>
+        <dd>
+          <span>{{ poi.postCode }}</span>
+        </dd>
+        <dt><span jhiTranslate="tiskelGeocoderApp.poi.lat">Lat</span></dt>
+        <dd>
+          <span>{{ poi.lat }}</span>
+        </dd>
+        <dt><span jhiTranslate="tiskelGeocoderApp.poi.lng">Lng</span></dt>
+        <dd>
+          <span>{{ poi.lng }}</span>
+        </dd>
+        <dt><span jhiTranslate="tiskelGeocoderApp.poi.active">Active</span></dt>
+        <dd>
+          <span>{{ poi.active }}</span>
+        </dd>
+        <dt><span jhiTranslate="tiskelGeocoderApp.poi.source">Source</span></dt>
+        <dd>
+          <div *ngIf="poi.source">
+            <a [routerLink]="['/source', poi.source?.id, 'view']">{{ poi.source?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="tiskelGeocoderApp.poi.poiGroup">Poi Group</span></dt>
+        <dd>
+          <div *ngIf="poi.poiGroup">
+            <a [routerLink]="['/poi-group', poi.poiGroup?.id, 'view']">{{ poi.poiGroup?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/poi', poi.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

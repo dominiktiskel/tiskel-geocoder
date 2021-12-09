@@ -1,0 +1,26 @@
+{
+  "tiskelGeocoderApp": {
+    "source": {
+      "home": {
+        "title": "Source",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Dodaj Source",
+        "createOrEditLabel": "Dodaj lub edytuj: Source",
+        "notFound": "No Sources found"
+      },
+      "created": "Utworzono nowy obiekt typu Source z identyfikatorem {{ param }}",
+      "updated": "Uaktualniono obiekt typu Source z identyfikatorem {{ param }}",
+      "deleted": "Usunięto obiekt typu Source z identyfikatorem {{ param }}",
+      "delete": {
+        "question": "Czy na pewno chcesz usunąć Source {{ id }}?"
+      },
+      "detail": {
+        "title": "Source"
+      },
+      "id": "ID",
+      "name": "Name",
+      "active": "Active",
+      "poi": "Poi"
+    }
+  }
+}

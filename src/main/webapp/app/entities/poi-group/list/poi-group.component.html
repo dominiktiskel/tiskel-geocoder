@@ -1,0 +1,82 @@
+<div>
+  <h2 id="page-heading" data-cy="PoiGroupHeading">
+    <span jhiTranslate="tiskelGeocoderApp.poiGroup.home.title">Poi Groups</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="tiskelGeocoderApp.poiGroup.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-poi-group"
+        [routerLink]="['/poi-group/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="tiskelGeocoderApp.poiGroup.home.createLabel"> Create a new Poi Group </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="poiGroups?.length === 0">
+    <span jhiTranslate="tiskelGeocoderApp.poiGroup.home.notFound">No poiGroups found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="poiGroups && poiGroups.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="tiskelGeocoderApp.poiGroup.name">Name</span></th>
+          <th scope="col"><span jhiTranslate="tiskelGeocoderApp.poiGroup.prefix">Prefix</span></th>
+          <th scope="col"><span jhiTranslate="tiskelGeocoderApp.poiGroup.active">Active</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let poiGroup of poiGroups; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/poi-group', poiGroup.id, 'view']">{{ poiGroup.id }}</a>
+          </td>
+          <td>{{ poiGroup.name }}</td>
+          <td>{{ poiGroup.prefix }}</td>
+          <td>{{ poiGroup.active }}</td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/poi-group', poiGroup.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/poi-group', poiGroup.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(poiGroup)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

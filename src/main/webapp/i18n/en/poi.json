@@ -1,0 +1,32 @@
+{
+  "tiskelGeocoderApp": {
+    "poi": {
+      "home": {
+        "title": "Pois",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Poi",
+        "createOrEditLabel": "Create or edit a Poi",
+        "notFound": "No Pois found"
+      },
+      "created": "A new Poi is created with identifier {{ param }}",
+      "updated": "A Poi is updated with identifier {{ param }}",
+      "deleted": "A Poi is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Poi {{ id }}?"
+      },
+      "detail": {
+        "title": "Poi"
+      },
+      "id": "ID",
+      "name": "Name",
+      "street": "Street",
+      "buildingNumber": "Building Number",
+      "postCode": "Post Code",
+      "lat": "Lat",
+      "lng": "Lng",
+      "active": "Active",
+      "source": "Source",
+      "poiGroup": "Poi Group"
+    }
+  }
+}
