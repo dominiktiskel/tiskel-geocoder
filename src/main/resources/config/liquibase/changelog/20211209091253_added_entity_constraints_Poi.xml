@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <!--
+        Added the constraints for entity Poi.
+    -->
+    <changeSet id="20211209091253-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="source_id"
+                                 baseTableName="poi"
+                                 constraintName="fk_poi__source_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="source"/>
+
+        <addForeignKeyConstraint baseColumnNames="poi_group_id"
+                                 baseTableName="poi"
+                                 constraintName="fk_poi__poi_group_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="poi_group"/>
+    </changeSet>
+</databaseChangeLog>

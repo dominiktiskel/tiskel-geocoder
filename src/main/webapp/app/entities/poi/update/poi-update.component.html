@@ -1,0 +1,144 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-poi-heading" data-cy="PoiCreateUpdateHeading" jhiTranslate="tiskelGeocoderApp.poi.home.createOrEditLabel">
+        Create or edit a Poi
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="tiskelGeocoderApp.poi.name" for="field_name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+          <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="tiskelGeocoderApp.poi.street" for="field_street">Street</label>
+          <input type="text" class="form-control" name="street" id="field_street" data-cy="street" formControlName="street" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="tiskelGeocoderApp.poi.buildingNumber" for="field_buildingNumber"
+            >Building Number</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="buildingNumber"
+            id="field_buildingNumber"
+            data-cy="buildingNumber"
+            formControlName="buildingNumber"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="tiskelGeocoderApp.poi.postCode" for="field_postCode">Post Code</label>
+          <input type="text" class="form-control" name="postCode" id="field_postCode" data-cy="postCode" formControlName="postCode" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="tiskelGeocoderApp.poi.lat" for="field_lat">Lat</label>
+          <input type="number" class="form-control" name="lat" id="field_lat" data-cy="lat" formControlName="lat" />
+          <div *ngIf="editForm.get('lat')!.invalid && (editForm.get('lat')!.dirty || editForm.get('lat')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('lat')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('lat')?.errors?.number" jhiTranslate="entity.validation.number">
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="tiskelGeocoderApp.poi.lng" for="field_lng">Lng</label>
+          <input type="number" class="form-control" name="lng" id="field_lng" data-cy="lng" formControlName="lng" />
+          <div *ngIf="editForm.get('lng')!.invalid && (editForm.get('lng')!.dirty || editForm.get('lng')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('lng')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('lng')?.errors?.number" jhiTranslate="entity.validation.number">
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="tiskelGeocoderApp.poi.active" for="field_active">Active</label>
+          <input type="checkbox" class="form-check" name="active" id="field_active" data-cy="active" formControlName="active" />
+          <div *ngIf="editForm.get('active')!.invalid && (editForm.get('active')!.dirty || editForm.get('active')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('active')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="tiskelGeocoderApp.poi.source" for="field_source">Source</label>
+          <select class="form-control" id="field_source" data-cy="source" name="source" formControlName="source">
+            <option *ngIf="!editForm.get('source')!.value" [ngValue]="null" selected></option>
+            <option
+              [ngValue]="sourceOption.id === editForm.get('source')!.value?.id ? editForm.get('source')!.value : sourceOption"
+              *ngFor="let sourceOption of sourcesSharedCollection; trackBy: trackSourceById"
+            >
+              {{ sourceOption.id }}
+            </option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['source'])!.invalid && (editForm.get(['source'])!.dirty || editForm.get(['source'])!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get(['source'])?.errors?.required" jhiTranslate="entity.validation.required">
+            This field is required.
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="tiskelGeocoderApp.poi.poiGroup" for="field_poiGroup">Poi Group</label>
+          <select class="form-control" id="field_poiGroup" data-cy="poiGroup" name="poiGroup" formControlName="poiGroup">
+            <option *ngIf="!editForm.get('poiGroup')!.value" [ngValue]="null" selected></option>
+            <option
+              [ngValue]="poiGroupOption.id === editForm.get('poiGroup')!.value?.id ? editForm.get('poiGroup')!.value : poiGroupOption"
+              *ngFor="let poiGroupOption of poiGroupsSharedCollection; trackBy: trackPoiGroupById"
+            >
+              {{ poiGroupOption.id }}
+            </option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['poiGroup'])!.invalid && (editForm.get(['poiGroup'])!.dirty || editForm.get(['poiGroup'])!.touched)">
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get(['poiGroup'])?.errors?.required"
+            jhiTranslate="entity.validation.required"
+          >
+            This field is required.
+          </small>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -42,7 +42,9 @@
     "clientTheme": "none",
     "clientThemeVariant": "",
     "reactive": false,
-    "enableGradleEnterprise": false
+    "enableGradleEnterprise": false,
+    "entities": ["Setting", "Source", "PoiGroup", "Poi"],
+    "lastLiquibaseTimestamp": 1639041173000
   },
   "git-provider": "GitHub",
   "git-company": "dominiktiskel",

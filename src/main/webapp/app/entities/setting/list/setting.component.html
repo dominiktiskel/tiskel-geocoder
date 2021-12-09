@@ -1,0 +1,84 @@
+<div>
+  <h2 id="page-heading" data-cy="SettingHeading">
+    <span jhiTranslate="tiskelGeocoderApp.setting.home.title">Settings</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="tiskelGeocoderApp.setting.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-setting"
+        [routerLink]="['/setting/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="tiskelGeocoderApp.setting.home.createLabel"> Create a new Setting </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="settings?.length === 0">
+    <span jhiTranslate="tiskelGeocoderApp.setting.home.notFound">No settings found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="settings && settings.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="tiskelGeocoderApp.setting.key">Key</span></th>
+          <th scope="col"><span jhiTranslate="tiskelGeocoderApp.setting.value">Value</span></th>
+          <th scope="col"><span jhiTranslate="tiskelGeocoderApp.setting.defaultValue">Default Value</span></th>
+          <th scope="col"><span jhiTranslate="tiskelGeocoderApp.setting.description">Description</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let setting of settings; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/setting', setting.id, 'view']">{{ setting.id }}</a>
+          </td>
+          <td>{{ setting.key }}</td>
+          <td>{{ setting.value }}</td>
+          <td>{{ setting.defaultValue }}</td>
+          <td>{{ setting.description }}</td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/setting', setting.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/setting', setting.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(setting)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

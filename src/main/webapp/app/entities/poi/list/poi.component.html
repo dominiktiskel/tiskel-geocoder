@@ -1,0 +1,92 @@
+<div>
+  <h2 id="page-heading" data-cy="PoiHeading">
+    <span jhiTranslate="tiskelGeocoderApp.poi.home.title">Pois</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="tiskelGeocoderApp.poi.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-poi"
+        [routerLink]="['/poi/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="tiskelGeocoderApp.poi.home.createLabel"> Create a new Poi </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="pois?.length === 0">
+    <span jhiTranslate="tiskelGeocoderApp.poi.home.notFound">No pois found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="pois && pois.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="tiskelGeocoderApp.poi.name">Name</span></th>
+          <th scope="col"><span jhiTranslate="tiskelGeocoderApp.poi.street">Street</span></th>
+          <th scope="col"><span jhiTranslate="tiskelGeocoderApp.poi.buildingNumber">Building Number</span></th>
+          <th scope="col"><span jhiTranslate="tiskelGeocoderApp.poi.postCode">Post Code</span></th>
+          <th scope="col"><span jhiTranslate="tiskelGeocoderApp.poi.lat">Lat</span></th>
+          <th scope="col"><span jhiTranslate="tiskelGeocoderApp.poi.lng">Lng</span></th>
+          <th scope="col"><span jhiTranslate="tiskelGeocoderApp.poi.active">Active</span></th>
+          <th scope="col"><span jhiTranslate="tiskelGeocoderApp.poi.source">Source</span></th>
+          <th scope="col"><span jhiTranslate="tiskelGeocoderApp.poi.poiGroup">Poi Group</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let poi of pois; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/poi', poi.id, 'view']">{{ poi.id }}</a>
+          </td>
+          <td>{{ poi.name }}</td>
+          <td>{{ poi.street }}</td>
+          <td>{{ poi.buildingNumber }}</td>
+          <td>{{ poi.postCode }}</td>
+          <td>{{ poi.lat }}</td>
+          <td>{{ poi.lng }}</td>
+          <td>{{ poi.active }}</td>
+          <td>
+            <div *ngIf="poi.source">
+              <a [routerLink]="['/source', poi.source?.id, 'view']">{{ poi.source?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="poi.poiGroup">
+              <a [routerLink]="['/poi-group', poi.poiGroup?.id, 'view']">{{ poi.poiGroup?.id }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/poi', poi.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/poi', poi.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(poi)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,63 @@
+{
+  "name": "Poi",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "street",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "buildingNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "postCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lat",
+      "fieldType": "Double",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "lng",
+      "fieldType": "Double",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "active",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "source",
+      "otherEntityRelationshipName": "poi",
+      "relationshipValidateRules": "required",
+      "relationshipName": "source"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "poiGroup",
+      "otherEntityRelationshipName": "poi",
+      "relationshipValidateRules": "required",
+      "relationshipName": "poiGroup"
+    }
+  ],
+  "entityTableName": "poi",
+  "dto": "mapstruct",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20211209091253"
+}
