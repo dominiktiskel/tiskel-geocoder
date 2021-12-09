@@ -1,0 +1,39 @@
+entity Settings {
+	key String required,
+    value String required,
+    defaultValue String required,
+    description String
+}
+
+entity Source {
+	name String required,
+    active Boolean required
+}
+
+entity PoiGroup {
+	name String required,
+    prefix String required,
+    active Boolean required,
+}
+
+entity Poi {
+	name String required,
+    street String,
+    buildingNumber String,
+    postCode String,
+    lat Double required,
+    lng Double required,
+    active Boolean required
+}
+
+
+relationship OneToMany {
+	Source{poi} to Poi{source required},
+    PoiGroup{poi} to Poi{poiGroup required}
+}
+
+dto * with mapstruct
+service * with serviceImpl
+
+// Set an angular suffix
+// angularSuffix * with mySuffix
